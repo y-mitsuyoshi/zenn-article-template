@@ -1,0 +1,54 @@
+name: CI - Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'articles/**'
+      - 'books/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'articles/**'
+      - 'books/**'
+
+jobs:
+  zenn-build-check:
+    name: Zenn記法チェック
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Zenn build
+        run: npm run lint:zenn
+
+  textlint-check:
+    name: 日本語校正 (textlint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run textlint
+        run: npm run lint:text
