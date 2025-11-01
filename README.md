@@ -146,19 +146,32 @@ npm run dev
 
 ### textlintルールのカスタマイズ
 
-`.textlintrc.js` を編集して、日本語校正のルールを調整できます。
+現在、textlintのルールは`package.json`の`lint:text`スクリプト内で直接指定されています。
 
-```javascript
-module.exports = {
-  rules: {
-    'preset-ja-technical-writing': {
-      'sentence-length': {
-        max: 150, // 1文の最大文字数を変更
+デフォルトで有効化されているルール:
+- `preset-ja-technical-writing`: 技術文書向けの日本語ルール
+- `preset-ja-spacing`: 日本語のスペーシングルール
+
+より詳細にカスタマイズしたい場合は、`.textlintrc`ファイルを作成することもできます:
+
+```json
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        "max": 150
       },
-      // 他のルールも追加可能
+      "no-exclamation-question-mark": false
     },
-  },
-};
+    "preset-ja-spacing": true
+  }
+}
+```
+
+`.textlintrc`ファイルを作成した場合は、`package.json`の`lint:text`スクリプトを以下のように変更してください:
+
+```json
+"lint:text": "textlint articles/**/*.md books/**/*.md"
 ```
 
 詳しくは [textlintのドキュメント](https://textlint.github.io/)を参照してください。

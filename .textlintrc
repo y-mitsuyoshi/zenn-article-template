@@ -1,0 +1,31 @@
+{{
+
+  "rules": {  "filters": {
+
+    "preset-ja-technical-writing": true,    "comments": true
+
+    "preset-ja-spacing": true  },
+
+  }  "rules": {
+
+}    "preset-ja-technical-writing": {
+
+      "sentence-length": {
+        "max": 150
+      },
+      "no-mix-dearu-desumasu": {
+        "preferInHeader": "",
+        "preferInBody": "ですます",
+        "preferInList": "である",
+        "strict": false
+      },
+      "no-double-negative-ja": true,
+      "ja-no-redundant-expression": true,
+      "max-ten": {
+        "max": 3
+      },
+      "no-dropping-the-ra": true
+    },
+    "preset-ja-spacing": true
+  }
+}
