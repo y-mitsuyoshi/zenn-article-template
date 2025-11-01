@@ -56,6 +56,8 @@ cd <リポジトリ名>
 npm install
 ```
 
+このコマンドで、Zenn CLIやtextlintなど、必要なパッケージがすべてインストールされます。
+
 ### ステップ2: Zennアカウントとの連携
 
 1. [Zennのダッシュボード](https://zenn.dev/dashboard/deploys)を開く
@@ -66,15 +68,22 @@ npm install
 
 これで、`main`ブランチへのマージが自動的にZennに反映されるようになります。
 
+> **詳しい手順**: [Zenn公式ドキュメント - GitHubリポジトリ連携](https://zenn.dev/zenn/articles/connect-to-github)を参照してください。
+
 ### ステップ3: GitHub Copilotレビューの有効化(任意)
 
-AI自動レビューを使用する場合:
+AI自動レビューを使用する場合は、以下の手順で設定します:
 
-1. リポジトリの **Settings** > **Copilot** > **Code review** を開く
-2. 「Use custom instructions when reviewing pull requests」を **On** に設定
-3. これで `.github/copilot/instructions.md` に基づいたレビューが自動実行されます
+1. GitHubのリポジトリページで **Settings**(歯車アイコン)をクリック
+2. 左サイドバーから **Copilot** を選択
+3. **Code review** セクションで以下を設定:
+   - 「Enable Copilot code review」をチェック
+   - 「Use custom instructions when reviewing pull requests」を **On** に設定
+4. 保存して完了
 
-> **Note**: GitHub Copilot Enterprise または Copilot Business の契約が必要です。
+これで、プルリクエスト作成時に `.github/copilot/instructions.md` に基づいたAIレビューが自動実行されます。
+
+> **Note**: この機能を使用するには、GitHub Copilot Enterprise または Copilot Business の契約が必要です。個人プランでは利用できません。
 
 ## ✍️ 執筆ワークフロー
 
@@ -191,6 +200,53 @@ module.exports = {
 
 - リポジトリ設定で Copilot Code review が有効か確認
 - GitHub Copilotの契約状況を確認
+
+## 🎓 テンプレート管理者向け: 次のステップ
+
+このテンプレートを作成した後、以下の設定を行うことで、他のユーザーが「Use this template」ボタンから利用できるようになります。
+
+### 1. GitHubでテンプレートリポジトリとして設定
+
+1. リポジトリページで **Settings**(歯車アイコン)をクリック
+2. 「General」セクションの上部にある **Template repository** にチェックを入れる
+3. 変更が自動保存されます
+
+これで、リポジトリページに緑色の「Use this template」ボタンが表示されるようになります。
+
+### 2. 初回セットアップ(このリポジトリでの作業)
+
+このテンプレートリポジトリ自体を使って記事を書く場合は、以下を実行してください:
+
+#### 2-1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+#### 2-2. Zenn CLIの初期化(まだの場合)
+
+```bash
+npx zenn init
+```
+
+このコマンドで、`articles/` と `books/` ディレクトリ、および `.zenn-config.json` が生成されます。
+(このテンプレートには既に含まれているため、実行不要です)
+
+#### 2-3. Zennアカウントとの連携
+
+上記「[セットアップ手順](#セットアップ手順)」のステップ2を参照してください。
+
+#### 2-4. GitHub Copilot Code Reviewの有効化
+
+上記「[セットアップ手順](#セットアップ手順)」のステップ3を参照してください。
+
+### 3. テンプレート利用者への案内
+
+テンプレート利用者には、以下を案内してください:
+
+1. 「Use this template」ボタンから新しいリポジトリを作成
+2. 本READMEの「[このテンプレートの使い方](#このテンプレートの使い方)」セクションに従ってセットアップ
+3. 記事を書いて、プルリクエストを作成し、自動レビューを受ける!
 
 ## 📚 参考リンク
 
